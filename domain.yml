@@ -1,34 +1,111 @@
 version: "3.1"
 
+# ============================================================
+# Domain — defines the universe of the chatbot:
+# intents, responses, session config, and actions.
+# ============================================================
+
+# --- All intents the bot can recognize ---
 intents:
   - greet
   - goodbye
+  - motivation
+  - inspiration
+  - love
+  - funny
+  - success
   - affirm
   - deny
-  - mood_great
-  - mood_unhappy
   - bot_challenge
+  - nlu_fallback
 
+# ============================================================
+# Responses — each response has exactly 5 variations so the
+# bot feels natural and avoids repetitive replies.
+# ============================================================
 responses:
+
+  # --- Greeting messages ---
   utter_greet:
-  - text: "Hey! How are you?"
+    - text: "Hey there! 👋 Welcome to the Quotes Recommendation Chatbot. I've got wisdom, humor, and heart — what kind of quote are you looking for today?"
+    - text: "Hello, friend! 🌟 Ready to fuel your day with some amazing quotes? Tell me — are you feeling motivated, romantic, or in need of a laugh?"
+    - text: "Hi! 😊 I'm your personal quote curator. Whether you need motivation, love, humor, or success — just say the word!"
+    - text: "Good to see you! ✨ I have quotes for every mood. Try saying something like 'motivate me' or 'make me laugh' to get started!"
+    - text: "Hey! 🎉 Welcome aboard the quote train. Tell me how you're feeling and I'll find the perfect words for you."
 
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-
-  utter_did_that_help:
-  - text: "Did that help you?"
-
-  utter_happy:
-  - text: "Great, carry on!"
-
+  # --- Goodbye messages ---
   utter_goodbye:
-  - text: "Bye"
+    - text: "Goodbye! 🌈 Remember — great things never come from comfort zones. See you next time!"
+    - text: "Take care! 💫 Carry those words with you and have an amazing day ahead."
+    - text: "See you later! 🙌 Keep shining and never stop believing in yourself."
+    - text: "Farewell, friend! 🌟 May the quotes you heard today stick with you when you need them most."
+    - text: "Bye for now! 😊 Come back anytime you need a dose of wisdom or a good laugh."
 
+  # --- Motivation quotes (real authors) ---
+  utter_motivation:
+    - text: "💪 \"Success is not final, failure is not fatal: it is the courage to continue that counts.\" — Winston Churchill"
+    - text: "🔥 \"It ain't about how hard you hit. It's about how hard you can get hit and keep moving forward.\" — Rocky Balboa"
+    - text: "🥊 \"Don't count the days, make the days count.\" — Muhammad Ali"
+    - text: "🌍 \"It always seems impossible until it's done.\" — Nelson Mandela"
+    - text: "🚀 \"When something is important enough, you do it even if the odds are not in your favor.\" — Elon Musk"
+
+  # --- Inspiration quotes (real authors) ---
+  utter_inspiration:
+    - text: "🍎 \"Your time is limited, so don't waste it living someone else's life.\" — Steve Jobs"
+    - text: "🌺 \"We delight in the beauty of the butterfly, but rarely admit the changes it has gone through to achieve that beauty.\" — Maya Angelou"
+    - text: "🧠 \"Imagination is more important than knowledge. Knowledge is limited. Imagination encircles the world.\" — Albert Einstein"
+    - text: "🌙 \"Let yourself be silently drawn by the strange pull of what you really love. It will not lead you astray.\" — Rumi"
+    - text: "🏰 \"All our dreams can come true, if we have the courage to pursue them.\" — Walt Disney"
+
+  # --- Love quotes (real authors) ---
+  utter_love:
+    - text: "❤️ \"I love you without knowing how, or when, or from where. I love you simply, without problems or pride.\" — Pablo Neruda"
+    - text: "💕 \"The best love is the kind that awakens the soul; that makes us reach for more, that plants the fire in our hearts and brings peace to our minds.\" — Nicholas Sparks"
+    - text: "💖 \"The greatest happiness of life is the conviction that we are loved; loved for ourselves, or rather, loved in spite of ourselves.\" — Victor Hugo"
+    - text: "🌹 \"Doubt thou the stars are fire, doubt that the sun doth move, doubt truth to be a liar, but never doubt I love.\" — William Shakespeare"
+    - text: "💗 \"Your task is not to seek for love, but merely to seek and find all the barriers within yourself that you have built against it.\" — Rumi"
+
+  # --- Funny quotes (real authors) ---
+  utter_funny:
+    - text: "😂 \"I can resist everything except temptation.\" — Oscar Wilde"
+    - text: "🤣 \"The secret of getting ahead is getting started. The secret of getting started is breaking your complex, overwhelming tasks into small manageable tasks, and then starting on the first one... and then procrastinating anyway.\" — Mark Twain (paraphrased with love)"
+    - text: "😄 \"Outside of a dog, a book is man's best friend. Inside of a dog, it's too dark to read.\" — Groucho Marx"
+    - text: "😏 \"I am easily satisfied with the very best.\" — Winston Churchill"
+    - text: "😆 \"A gentleman is one who never hurts anyone's feelings unintentionally.\" — Oscar Wilde"
+
+  # --- Success quotes (real authors) ---
+  utter_success:
+    - text: "🏆 \"Genius is one percent inspiration and ninety-nine percent perspiration.\" — Thomas Edison"
+    - text: "🌟 \"The biggest adventure you can take is to live the life of your dreams.\" — Oprah Winfrey"
+    - text: "📈 \"It's fine to celebrate success, but it is more important to heed the lessons of failure.\" — Bill Gates"
+    - text: "💰 \"The difference between successful people and really successful people is that really successful people say no to almost everything.\" — Warren Buffett"
+    - text: "🏅 \"The only place success comes before work is in the dictionary.\" — Vince Lombardi"
+
+  # --- Follow-up / ask more messages ---
+  utter_ask_more:
+    - text: "Would you like another quote? Just tell me the category — motivation, inspiration, love, funny, or success! 😊"
+    - text: "Want more? I've got plenty! Just say the word — or try a different category!"
+    - text: "There's more where that came from! 🎯 What kind of quote would you like next?"
+    - text: "Ready for another one? Pick a mood — motivational, inspiring, romantic, funny, or success!"
+    - text: "I can keep going all day! 💪 Want another quote or a different category?"
+
+  # --- Fallback messages for unrecognized input ---
+  utter_fallback:
+    - text: "Hmm, I didn't quite catch that. 🤔 Could you try rephrasing? You can say things like 'motivate me' or 'give me a love quote'."
+    - text: "I'm not sure I understood. Try asking for a specific type of quote — motivation, inspiration, love, funny, or success!"
+    - text: "Oops, that went over my head! 😅 I'm best at recommending quotes. Try saying something like 'inspire me' or 'make me laugh'."
+    - text: "Sorry, I didn't get that. I work best when you tell me a mood or quote category. What are you feeling today?"
+    - text: "I'm a bit confused! 🙈 I can help with quotes about motivation, inspiration, love, humor, or success. What sounds good?"
+
+  # --- Bot identity disclosure ---
   utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
+    - text: "I am a chatbot, powered by Rasa! 🤖 I'm here to recommend quotes that match your mood."
+    - text: "Yes, I'm a bot — but a very well-read one! 📚 I specialize in finding the perfect quote for you."
+    - text: "Guilty as charged — I'm an AI chatbot! But I promise, the quotes I share are 100% real and from real authors. 😊"
 
+# ============================================================
+# Session Configuration
+# ============================================================
 session_config:
-  session_expiration_time: 60
+  session_expiration_time: 60  # minutes before session expires
   carry_over_slots_to_new_session: true

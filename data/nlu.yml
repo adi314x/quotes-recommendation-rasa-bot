@@ -1,91 +1,218 @@
 version: "3.1"
 
+# ============================================================
+# NLU Training Data for Quotes Recommendation Chatbot
+# Each intent has 15+ varied, natural-sounding examples
+# ============================================================
+
 nlu:
+
+# --- Greeting intent ---
 - intent: greet
   examples: |
-    - hey
-    - hello
     - hi
-    - hello there
+    - hello
+    - hey
     - good morning
     - good evening
-    - moin
+    - what's up
+    - howdy
+    - greetings
+    - yo
+    - sup
+    - hi there
     - hey there
-    - let's go
-    - hey dude
-    - goodmorning
-    - goodevening
     - good afternoon
+    - hiya
+    - nice to meet you
 
+# --- Goodbye intent ---
 - intent: goodbye
   examples: |
-    - cu
-    - good by
-    - cee you later
-    - good night
     - bye
     - goodbye
-    - have a nice day
-    - see you around
-    - bye bye
-    - see you later
+    - see you
+    - take care
+    - later
+    - catch you later
+    - farewell
+    - I'm leaving
+    - gotta go
+    - peace out
+    - see ya
+    - good night
+    - thanks bye
+    - alright bye
+    - ciao
 
+# --- Motivation intent ---
+- intent: motivation
+  examples: |
+    - I need motivation
+    - feeling lazy
+    - give me energy
+    - I want to push harder
+    - I'm giving up
+    - feeling low
+    - I need a push
+    - motivate me
+    - boost me up
+    - I feel demotivated
+    - I'm tired of trying
+    - need some fire
+    - help me stay focused
+    - I feel like quitting
+    - I need strength
+
+# --- Inspiration intent ---
+- intent: inspiration
+  examples: |
+    - inspire me
+    - I need inspiration
+    - feel stuck
+    - need a spark
+    - lost my direction
+    - I feel lost
+    - need clarity
+    - give me something to think about
+    - I need a new perspective
+    - I'm uninspired
+    - stir something in me
+    - awaken my spirit
+    - I need purpose
+    - what should I do with my life
+    - ignite me
+
+# --- Love intent ---
+- intent: love
+  examples: |
+    - give me a love quote
+    - something about love
+    - heartfelt quote
+    - I miss someone
+    - quote on relationships
+    - I'm in love
+    - my heart is full
+    - something romantic
+    - quote about feelings
+    - love hurts quote
+    - sweet quote
+    - something about longing
+    - I'm heartbroken
+    - missing someone
+    - quote about connection
+
+# --- Funny intent ---
+- intent: funny
+  examples: |
+    - make me laugh
+    - tell me something funny
+    - humor quote
+    - I need a joke
+    - cheer me up
+    - something witty
+    - lighten my mood
+    - I want to smile
+    - got any jokes
+    - funny quote please
+    - say something hilarious
+    - I'm bored make me laugh
+    - any comedy quotes
+    - something sarcastic
+    - tickle me
+
+# --- Success intent ---
+- intent: success
+  examples: |
+    - quotes on success
+    - achieving goals
+    - winning mindset
+    - I want to succeed
+    - greatness quotes
+    - help me win
+    - I need to achieve more
+    - quote about hard work
+    - something about reaching the top
+    - I want to be great
+    - push me to succeed
+    - quote about hustle
+    - ambition quotes
+    - I want to be successful
+    - excellence quotes
+
+# --- Affirm intent (user wants more) ---
 - intent: affirm
   examples: |
     - yes
-    - y
-    - indeed
+    - sure
+    - please
+    - go ahead
+    - definitely
     - of course
-    - that sounds good
-    - correct
+    - yeah
+    - yep
+    - absolutely
+    - why not
+    - ok
+    - sounds good
+    - give me more
+    - one more please
+    - yes please
 
+# --- Deny intent (user wants to stop) ---
 - intent: deny
   examples: |
     - no
-    - n
-    - never
-    - I don't think so
-    - don't like that
-    - no way
-    - not really
+    - not now
+    - skip
+    - never mind
+    - that's ok
+    - no thanks
+    - I'm good
+    - maybe later
+    - stop
+    - enough
+    - I'm fine
+    - no more
+    - nah
+    - that'll do
+    - no need
 
-- intent: mood_great
-  examples: |
-    - perfect
-    - great
-    - amazing
-    - feeling like a king
-    - wonderful
-    - I am feeling very good
-    - I am great
-    - I am amazing
-    - I am going to save the world
-    - super stoked
-    - extremely good
-    - so so perfect
-    - so good
-    - so perfect
-
-- intent: mood_unhappy
-  examples: |
-    - my day was horrible
-    - I am sad
-    - I don't feel very well
-    - I am disappointed
-    - super sad
-    - I'm so sad
-    - sad
-    - very sad
-    - unhappy
-    - not good
-    - not very good
-    - extremly sad
-    - so saad
-    - so sad
-
+# --- Bot challenge intent ---
 - intent: bot_challenge
   examples: |
-    - are you a bot?
-    - are you a human?
-    - am I talking to a bot?
-    - am I talking to a human?
+    - are you a bot
+    - are you a human
+    - am I talking to a bot
+    - am I talking to a human
+    - are you real
+    - are you a robot
+    - is this a chatbot
+    - who am I talking to
+    - are you AI
+    - are you artificial intelligence
+    - what are you
+    - are you a machine
+    - tell me if you are a bot
+    - you are a bot right
+    - is this automated
+
+# ============================================================
+# Regex Features — help detect quote-related keywords
+# ============================================================
+- regex: quote_keyword
+  examples: |
+    - quote
+    - quotes
+
+- regex: inspire_keyword
+  examples: |
+    - inspire
+    - inspiration
+    - inspired
+
+- regex: motivate_keyword
+  examples: |
+    - motivate
+    - motivation
+    - motivated

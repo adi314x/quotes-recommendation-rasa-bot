@@ -1,91 +1,109 @@
-#### This file contains tests to evaluate that your bot behaves as expected.
-#### If you want to learn more, please see the docs: https://rasa.com/docs/rasa/testing-your-assistant
+version: "3.1"
+
+# ============================================================
+# Test Stories — end-to-end conversation tests
+# Run with: rasa test
+# These mirror real user flows to validate bot behavior.
+# ============================================================
 
 stories:
-- story: happy path 1
-  steps:
-  - user: |
-      hello there!
-    intent: greet
-  - action: utter_greet
-  - user: |
-      amazing
-    intent: mood_great
-  - action: utter_happy
 
-- story: happy path 2
+# Test 1: Basic greeting and farewell
+- story: test basic greet and goodbye
   steps:
-  - user: |
-      hello there!
-    intent: greet
-  - action: utter_greet
-  - user: |
-      amazing
-    intent: mood_great
-  - action: utter_happy
-  - user: |
-      bye-bye!
-    intent: goodbye
-  - action: utter_goodbye
+    - user: |
+        hello
+      intent: greet
+    - action: utter_greet
+    - user: |
+        bye
+      intent: goodbye
+    - action: utter_goodbye
 
-- story: sad path 1
+# Test 2: Motivation full flow with affirm
+- story: test motivation full flow
   steps:
-  - user: |
-      hello
-    intent: greet
-  - action: utter_greet
-  - user: |
-      not good
-    intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - user: |
-      yes
-    intent: affirm
-  - action: utter_happy
+    - user: |
+        hi
+      intent: greet
+    - action: utter_greet
+    - user: |
+        I need motivation
+      intent: motivation
+    - action: utter_motivation
+    - user: |
+        yes please
+      intent: affirm
+    - action: utter_ask_more
+    - user: |
+        motivate me
+      intent: motivation
+    - action: utter_motivation
+    - user: |
+        no thanks
+      intent: deny
+    - action: utter_goodbye
 
-- story: sad path 2
+# Test 3: Handling unrecognized input via fallback
+- story: test fallback handling
   steps:
-  - user: |
-      hello
-    intent: greet
-  - action: utter_greet
-  - user: |
-      not good
-    intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - user: |
-      not really
-    intent: deny
-  - action: utter_goodbye
+    - user: |
+        xyzzy blah random gibberish
+      intent: nlu_fallback
+    - action: utter_fallback
+    - user: |
+        I need motivation
+      intent: motivation
+    - action: utter_motivation
+    - user: |
+        goodbye
+      intent: goodbye
+    - action: utter_goodbye
 
-- story: sad path 3
+# Test 4: Love quote then switch to funny
+- story: test love then funny quote
   steps:
-  - user: |
-      hi
-    intent: greet
-  - action: utter_greet
-  - user: |
-      very terrible
-    intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - user: |
-      no
-    intent: deny
-  - action: utter_goodbye
+    - user: |
+        hey there
+      intent: greet
+    - action: utter_greet
+    - user: |
+        give me a love quote
+      intent: love
+    - action: utter_love
+    - user: |
+        sure
+      intent: affirm
+    - action: utter_ask_more
+    - user: |
+        make me laugh
+      intent: funny
+    - action: utter_funny
+    - user: |
+        see you
+      intent: goodbye
+    - action: utter_goodbye
 
-- story: say goodbye
+# Test 5: Success quote full loop
+- story: test success quote loop
   steps:
-  - user: |
-      bye-bye!
-    intent: goodbye
-  - action: utter_goodbye
-
-- story: bot challenge
-  steps:
-  - user: |
-      are you a bot?
-    intent: bot_challenge
-  - action: utter_iamabot
+    - user: |
+        good morning
+      intent: greet
+    - action: utter_greet
+    - user: |
+        quotes on success
+      intent: success
+    - action: utter_success
+    - user: |
+        give me more
+      intent: affirm
+    - action: utter_ask_more
+    - user: |
+        I want to be successful
+      intent: success
+    - action: utter_success
+    - user: |
+        that'll do
+      intent: deny
+    - action: utter_goodbye

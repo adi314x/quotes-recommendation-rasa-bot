@@ -1,30 +1,133 @@
 version: "3.1"
 
+# ============================================================
+# Stories — multi-turn conversation flows for training
+# These stories teach the dialogue model how to handle
+# different conversation patterns and user journeys.
+# ============================================================
+
 stories:
 
-- story: happy path
+# Story 1: Full motivation flow with affirm and deny
+- story: happy path - motivation with follow-up
   steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_great
-  - action: utter_happy
+    - intent: greet
+    - action: utter_greet
+    - intent: motivation
+    - action: utter_motivation
+    - intent: affirm
+    - action: utter_ask_more
+    - intent: motivation
+    - action: utter_motivation
+    - intent: deny
+    - action: utter_goodbye
 
-- story: sad path 1
+# Story 2: Quick inspiration then leave
+- story: happy path - inspiration then goodbye
   steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: affirm
-  - action: utter_happy
+    - intent: greet
+    - action: utter_greet
+    - intent: inspiration
+    - action: utter_inspiration
+    - intent: deny
+    - action: utter_goodbye
 
-- story: sad path 2
+# Story 3: Love quote then switch to funny
+- story: happy path - love then funny
   steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: deny
-  - action: utter_goodbye
+    - intent: greet
+    - action: utter_greet
+    - intent: love
+    - action: utter_love
+    - intent: affirm
+    - action: utter_ask_more
+    - intent: funny
+    - action: utter_funny
+    - intent: goodbye
+    - action: utter_goodbye
+
+# Story 4: Success quote with repeat request
+- story: happy path - success with repeat
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: success
+    - action: utter_success
+    - intent: affirm
+    - action: utter_ask_more
+    - intent: success
+    - action: utter_success
+    - intent: deny
+    - action: utter_goodbye
+
+# Story 5: Funny quote with encore
+- story: happy path - funny with encore
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: funny
+    - action: utter_funny
+    - intent: affirm
+    - action: utter_ask_more
+    - intent: funny
+    - action: utter_funny
+    - intent: goodbye
+    - action: utter_goodbye
+
+# Story 6: Multi-intent journey across categories
+- story: multi-intent - motivation inspiration success
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: motivation
+    - action: utter_motivation
+    - intent: inspiration
+    - action: utter_inspiration
+    - intent: success
+    - action: utter_success
+    - intent: goodbye
+    - action: utter_goodbye
+
+# Story 7: Fallback recovery into motivation
+- story: fallback recovery - unknown then motivation
+  steps:
+    - intent: nlu_fallback
+    - action: utter_fallback
+    - intent: motivation
+    - action: utter_motivation
+    - intent: goodbye
+    - action: utter_goodbye
+
+# Story 8: Direct quote request without greeting
+- story: direct quote - motivation without greet
+  steps:
+    - intent: motivation
+    - action: utter_motivation
+    - intent: deny
+    - action: utter_goodbye
+
+# Story 9: Back-to-back quote categories
+- story: back to back - love funny success
+  steps:
+    - intent: love
+    - action: utter_love
+    - intent: funny
+    - action: utter_funny
+    - intent: success
+    - action: utter_success
+    - intent: goodbye
+    - action: utter_goodbye
+
+# Story 10: Emotional arc through the conversation
+- story: emotional arc - funny to motivation to success
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: funny
+    - action: utter_funny
+    - intent: motivation
+    - action: utter_motivation
+    - intent: success
+    - action: utter_success
+    - intent: goodbye
+    - action: utter_goodbye
