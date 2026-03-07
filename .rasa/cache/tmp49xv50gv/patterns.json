@@ -1,0 +1,34 @@
+[
+  {
+    "name": "inspire_keyword",
+    "pattern": "inspiration"
+  },
+  {
+    "name": "inspire_keyword",
+    "pattern": "inspire"
+  },
+  {
+    "name": "inspire_keyword",
+    "pattern": "inspired"
+  },
+  {
+    "name": "motivate_keyword",
+    "pattern": "motivate"
+  },
+  {
+    "name": "motivate_keyword",
+    "pattern": "motivated"
+  },
+  {
+    "name": "motivate_keyword",
+    "pattern": "motivation"
+  },
+  {
+    "name": "quote_keyword",
+    "pattern": "quote"
+  },
+  {
+    "name": "quote_keyword",
+    "pattern": "quotes"
+  }
+]
