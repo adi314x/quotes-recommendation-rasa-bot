@@ -64,8 +64,8 @@ chatbot-using-rasa-nlu/
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/quotes-recommendation-chatbot.git
-cd quotes-recommendation-chatbot
+git clone https://github.com/adi314x/quotes-recommendation-rasa-bot.git
+cd quotes-recommendation-rasa-bot
 ```
 
 ### Step 2: Create a Virtual Environment
