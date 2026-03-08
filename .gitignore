@@ -2,3 +2,5 @@ models/
 __pycache__/
 *.pyc
 .env
+rasa_env/
+.rasa/
